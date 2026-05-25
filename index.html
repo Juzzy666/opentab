@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Tab - Syracuse Restaurant Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #0A0A0A;
+            background: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ANNOUNCEMENT BAR */
+        .announcement-bar {
+            background: #0A0A0A;
+            border-bottom: 1px solid #222;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-align: center;
+        }
+
+        /* NAV */
+        nav {
+            background: #0A0A0A;
+            border-bottom: 1px solid #1A1A1A;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #0A0A0A;
+            font-size: 14px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .nav-btn {
+            background: #FFFFFF;
+            color: #0A0A0A;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+
+        .nav-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 22px;
+            height: 2px;
+            background: #FFFFFF;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            background-image: url('https://images.pexels.com/photos/36107885/pexels-photo-36107885.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: grayscale(100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+        }
+
+        .hero-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 88px;
+            font-weight: 700;
+            line-height: 1.05;
+            color: #FFFFFF;
+            margin-bottom: 24px;
+        }
+
+        .hero-subheadline {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #FFFFFF;
+            color: #0A0A0A;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            border: 1px solid #FFFFFF;
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        .stat-pills {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 48px;
+        }
+
+        .stat-pill {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            font-size: 13px;
+            color: #FFFFFF;
+        }
+
+        /* SOCIAL PROOF */
+        .social-proof {
+            background: #F7F7F7;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .stars {
+            font-size: 28px;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-style: italic;
+            color: #0A0A0A;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .attribution {
+            font-size: 13px;
+            color: #999999;
+            margin-top: 16px;
+        }
+
+        .trust-pills {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .trust-pill {
+            border: 1px solid #0A0A0A;
+            padding: 10px 20px;
+            font-size: 13px;
+            color: #0A0A0A;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            background: #FFFFFF;
+            padding: 100px 40px;
+        }
+
+        .section-eyebrow {
+            font-size: 11px;
+            color: #999999;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            color: #D4AF37;
+            text-align: center;
+            margin-bottom: 80px;
+            text-shadow: 0 2px 4px rgba(212, 175, 55, 0.2);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        .step {
+            position: relative;
+            text-align: left;
+        }
+
+        .step::before {
+            content: attr(data-number);
+            position: absolute;
+            font-size: 180px;
+            font-weight: 800;
+            color: rgba(10, 10, 10, 0.08);
+            top: -80px;
+            left: -40px;
+            z-index: 0;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .step-number {
+            font-size: 12px;
+            color: #0A0A0A;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: #0A0A0A;
+            margin-bottom: 12px;
+        }
+
+        .step-body {
+            font-size: 16px;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        /* PAIN POINTS */
+        .pain-points {
+            background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%);
+            padding: 100px 40px;
+            position: relative;
+        }
+
+        .pain-points::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 1;
+        }
+
+        .pain-points .section-eyebrow {
+            color: rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .pain-points .section-headline {
+            color: #FFFFFF;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pain-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pain-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .pain-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .pain-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            filter: hue-rotate(0deg) saturate(1.5) brightness(1.1);
+        }
+        
+        .pain-card:nth-child(1) .pain-icon {
+            filter: hue-rotate(0deg) saturate(1.5) brightness(1.1);
+            color: #FF6B6B;
+        }
+        
+        .pain-card:nth-child(2) .pain-icon {
+            filter: hue-rotate(45deg) saturate(1.5) brightness(1.1);
+            color: #FFA94D;
+        }
+        
+        .pain-card:nth-child(3) .pain-icon {
+            filter: hue-rotate(180deg) saturate(1.5) brightness(1.1);
+            color: #4ECDC4;
+        }
+        
+        .pain-card:nth-child(4) .pain-icon {
+            filter: hue-rotate(290deg) saturate(1.5) brightness(1.1);
+            color: #B19CD9;
+        }
+
+        .pain-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #FFFFFF;
+        }
+
+        .pain-body {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            margin-top: 12px;
+        }
+
+        /* PRICING */
+        .pricing {
+            background: #F7F7F7;
+            padding: 100px 40px;
+        }
+
+        .pricing .section-headline {
+            margin-bottom: 16px;
+        }
+
+        .pricing .section-subheadline {
+            font-size: 18px;
+            color: #999999;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .pricing-step-label {
+            font-size: 11px;
+            color: #0A0A0A;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .foundation-card {
+            background: #FFFFFF;
+            border: 2px solid #0A0A0A;
+            max-width: 580px;
+            margin: 0 auto 80px;
+            padding: 56px;
+            transition: all 0.3s ease;
+        }
+        
+        .foundation-card:hover {
+            background: #FAFAFA;
+            border-color: #D4AF37;
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .foundation-label {
+            font-size: 11px;
+            color: #999999;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 8px;
+        }
+
+        .foundation-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            color: #0A0A0A;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .foundation-subtitle {
+            font-size: 16px;
+            color: #999999;
+            margin-bottom: 32px;
+        }
+
+        .foundation-bullets {
+            border-top: 1px solid #E5E5E5;
+            padding-top: 24px;
+            font-size: 15px;
+            color: #0A0A0A;
+            line-height: 2;
+        }
+
+        .foundation-bullets li {
+            list-style: none;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .foundation-bullets li::before {
+            content: "✅";
+            color: #22C55E;
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 24px;
+        }
+
+        .foundation-btn {
+            background: #0A0A0A;
+            color: #FFFFFF;
+            width: 100%;
+            padding: 18px;
+            margin-top: 32px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .foundation-fine-print {
+            font-size: 13px;
+            color: #999999;
+            font-style: italic;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .recurring-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #0A0A0A;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.featured {
+            border: 2px solid #0A0A0A;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            font-size: 10px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #0A0A0A;
+        }
+
+        .card-price {
+            font-size: 42px;
+            font-weight: 700;
+            color: #0A0A0A;
+            margin-top: 8px;
+        }
+
+        .card-period {
+            font-size: 14px;
+            color: #999999;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: #999999;
+            border-top: 1px solid #E5E5E5;
+            padding-top: 24px;
+            margin-top: 8px;
+            margin-bottom: 24px;
+        }
+
+        .card-items {
+            font-size: 14px;
+            line-height: 2.2;
+        }
+
+        .card-items li {
+            list-style: none;
+            color: #0A0A0A;
+        }
+
+        .card-items li.unavailable {
+            color: #CCCCCC;
+        }
+
+        .addon-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .addon-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .addon-card:hover {
+            border-color: #0A0A0A;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        }
+
+        .addon-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .addon-price {
+            font-size: 14px;
+            color: #999999;
+            margin-top: 4px;
+        }
+
+        .addon-desc {
+            font-size: 13px;
+            color: #999999;
+            line-height: 1.6;
+            margin-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            padding-top: 12px;
+        }
+
+        /* TRUST SIGNALS */
+        .trust-signals {
+            background: #F5F5F5;
+            padding: 40px 40px 80px 40px;
+            text-align: center;
+        }
+
+        .trust-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .trust-icon {
+            font-size: 40px;
+            line-height: 1;
+        }
+
+        .trust-label {
+            font-weight: 600;
+            font-size: 15px;
+            color: #0A0A0A;
+            line-height: 1.4;
+        }
+
+        .trust-subtext {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* ABOUT */
+        .about {
+            background: #0A0A0A;
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+        }
+
+        .about-content .eyebrow {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .about-content .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #FFFFFF;
+            line-height: 1.1;
+            margin-top: 16px;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-top: 24px;
+        }
+
+        .about-signature {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #FFFFFF;
+            margin-top: 32px;
+        }
+
+        .about-pill {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 24px;
+        }
+
+        /* EMAIL CAPTURE */
+        .email-capture {
+            background: #FFFFFF;
+            border-top: 1px solid #E5E5E5;
+            border-bottom: 1px solid #E5E5E5;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .email-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #0A0A0A;
+        }
+
+        .email-subheadline {
+            font-size: 16px;
+            color: #999999;
+            margin-top: 16px;
+            margin-bottom: 40px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 0;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .email-form input {
+            flex: 1;
+            border: 1px solid #0A0A0A;
+            padding: 16px;
+            font-size: 15px;
+        }
+
+        .email-form input::placeholder {
+            color: #CCC;
+        }
+
+        .email-form button {
+            background: #0A0A0A;
+            color: #FFFFFF;
+            padding: 16px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid #0A0A0A;
+            cursor: pointer;
+        }
+
+        .email-fine-print {
+            font-size: 12px;
+            color: #CCCCCC;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        /* FINAL CTA */
+        .final-cta {
+            background: #FFFFFF;
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .final-eyebrow {
+            font-size: 11px;
+            color: rgba(10, 10, 10, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .final-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            color: #0A0A0A;
+            line-height: 1.05;
+            margin-top: 16px;
+        }
+
+        .final-subheadline {
+            font-size: 18px;
+            color: rgba(10, 10, 10, 0.5);
+            margin-top: 24px;
+        }
+
+        .final-trust-pills {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .final-trust-pill {
+            border: 1px solid rgba(10, 10, 10, 0.2);
+            padding: 10px 20px;
+            font-size: 13px;
+            color: #0A0A0A;
+        }
+
+        .final-btn {
+            background: #0A0A0A;
+            color: #FFFFFF;
+            padding: 20px 48px;
+            margin-top: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .final-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        .final-line {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.3);
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #050505;
+            border-top: 1px solid #1A1A1A;
+            padding: 48px 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-left {
+            color: #FFFFFF;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: #666666;
+            margin-top: 4px;
+        }
+
+        .footer-center a {
+            color: #666666;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .footer-center a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-right {
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #111111;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #444444;
+        }
+
+        /* MOBILE STICKY BUTTON */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border-top: 1px solid #E5E5E5;
+            height: 56px;
+            z-index: 999;
+        }
+
+        .mobile-cta a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            color: #0A0A0A;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-cta {
+                display: block;
+            }
+            body {
+                padding-bottom: 70px;
+            }
+            .steps, .recurring-cards, .addon-cards {
+                grid-template-columns: 1fr;
+            }
+            .about {
+                grid-template-columns: 1fr;
+            }
+            .pain-cards {
+                grid-template-columns: 1fr;
+            }
+            .hero-headline {
+                font-size: 48px;
+            }
+            .final-headline {
+                font-size: 42px;
+            }
+        }
+
+        /* ANIMATIONS */
+        [data-animate] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        [data-animate].visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">SYRACUSE'S RESTAURANT MARKETING AGENCY · NO CONTRACTS · NO RUNAROUND · ALWAYS OPEN</div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-brand">Open Tab</div>
+        <div class="nav-links">
+            <a href="#how-it-works">See Demo →</a>
+            <a href="mailto:justindesignsyr@gmail.com" class="nav-btn">Let's Talk →</a>
+        </div>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow">RESTAURANT MARKETING · SYRACUSE, NY</div>
+            <h1 class="hero-headline">We Already Built<br>Your Site.</h1>
+            <p class="hero-subheadline">Scroll down to see what we mean.</p>
+            <div class="hero-buttons">
+                <a href="https://milkhouse-static.vercel.app" class="btn btn-primary">See a Live Demo →</a>
+                <a href="mailto:justindesignsyr@gmail.com" class="btn btn-secondary">Let's Talk →</a>
+            </div>
+            <div class="stat-pills">
+                <div class="stat-pill">74% of diners Google you before they visit</div>
+                <div class="stat-pill">68% check social before choosing</div>
+                <div class="stat-pill">A bad first impression = an empty table</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="social-proof" data-animate>
+        <div class="stars">★★★★★</div>
+        <p class="quote">"They walked in, showed me my own restaurant on a phone, and had it live by Thursday. I didn't have to do a thing."</p>
+        <p class="attribution">— Local Syracuse Restaurant Owner</p>
+        <div class="trust-pills">
+            <div class="trust-pill">⚡ Live in 48 Hours</div>
+            <div class="trust-pill">🔒 You Own Everything</div>
+            <div class="trust-pill">📞 Direct Line to Justin</div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works" id="how-it-works" data-animate>
+        <div class="section-eyebrow">THE PROCESS</div>
+        <h2 class="section-headline">No Meetings. No Decks. No Nonsense.</h2>
+        <div class="steps">
+            <div class="step" data-number="01">
+                <div class="step-number">01</div>
+                <h3 class="step-title">It Already Exists</h3>
+                <p class="step-body">Your site is live before we ever walk through your door. Built from your real menu, your real photos, your real reviews.</p>
+            </div>
+            <div class="step" data-number="02">
+                <div class="step-number">02</div>
+                <h3 class="step-title">You See It First</h3>
+                <p class="step-body">We show up, hand you a phone, and let it speak for itself. No pitch. No pressure. Just scroll.</p>
+            </div>
+            <div class="step" data-number="03">
+                <div class="step-number">03</div>
+                <h3 class="step-title">You Decide</h3>
+                <p class="step-body">Love it? We put it on your domain this week. Not feeling it? No hard feelings. Buy you a beer either way.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAIN POINTS -->
+    <section class="pain-points" data-animate>
+        <div class="section-eyebrow">SOUND FAMILIAR?</div>
+        <h2 class="section-headline">What's Costing You Tables Right Now.</h2>
+        <div class="pain-cards">
+            <div class="pain-card">
+                <div class="pain-icon">🔍</div>
+                <h3 class="pain-title">The Invisible Restaurant</h3>
+                <p class="pain-body">Your competitor shows up first on Google. You're on page 2. That's not a food problem. That's a marketing problem.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">📱</div>
+                <h3 class="pain-title">The Broken First Impression</h3>
+                <p class="pain-body">Wrong hours. Blurry PDF menu. A site that breaks on phones. Customers see that and choose somewhere else — before they walk in.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">🪑</div>
+                <h3 class="pain-title">The Empty Seats</h3>
+                <p class="pain-body">No email list. No social presence. No way to reach your customers when you need them most.</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">⭐</div>
+                <h3 class="pain-title">The Silent Reviews</h3>
+                <p class="pain-body">Your competitor responds to every review. You haven't touched yours in months. Customers notice. Google notices more.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" data-animate>
+        <div class="section-eyebrow">PRICING</div>
+        <h2 class="section-headline">Simple. Transparent. Yours to Control.</h2>
+        <p class="section-subheadline">Start with the site. Add what you need.</p>
+
+        <div class="pricing-step-label">STEP 1 — START HERE</div>
+        <div class="foundation-card">
+            <div class="foundation-label">THE FOUNDATION</div>
+            <div class="foundation-price">$950</div>
+            <p class="foundation-subtitle">Own it forever. One flat fee.</p>
+            <ul class="foundation-bullets">
+                <li>Mobile-perfect website on your domain</li>
+                <li>Full digital menu — no PDFs, no zooming</li>
+                <li>One-tap Call, Directions, and Hours</li>
+                <li>Live within 48 hours</li>
+            </ul>
+            <button class="foundation-btn" onclick="window.location.href='mailto:justindesignsyr@gmail.com'">Start With The Site →</button>
+            <p class="foundation-fine-print">Just want the site? That's all you ever pay. No pressure, no upsell.</p>
+        </div>
+
+        <div class="pricing-step-label">STEP 2 — OPTIONAL</div>
+        <div class="container">
+            <h3 class="section-headline" style="font-size: 42px; margin-bottom: 12px;">Want Us To Run It?</h3>
+            <p class="section-subheadline">Cancel anytime. No contracts.</p>
+        </div>
+        <div class="recurring-cards">
+            <div class="card">
+                <h4 class="card-title">Hands-Free</h4>
+                <div class="card-price">$250</div>
+                <div class="card-period">per month</div>
+                <p class="card-subtitle">For owners who just want it handled.</p>
+                <ul class="card-items">
+                    <li>✅ Unlimited updates — text us a photo</li>
+                    <li>✅ Hosting and maintenance</li>
+                    <li>✅ Google Business Profile optimization</li>
+                    <li>✅ Monthly Google ranking check</li>
+                    <li>✅ Reservation + ordering platform sync</li>
+                    <li>✅ Same-day response</li>
+                    <li class="unavailable">❌ Social media posts</li>
+                    <li class="unavailable">❌ Email marketing</li>
+                    <li class="unavailable">❌ Review monitoring + responses</li>
+                    <li class="unavailable">❌ Seasonal promotions</li>
+                </ul>
+            </div>
+            <div class="card featured">
+                <div class="popular-badge">MOST POPULAR</div>
+                <h4 class="card-title">Rush Hour</h4>
+                <div class="card-price">$899</div>
+                <div class="card-period">per month</div>
+                <p class="card-subtitle">Build momentum. Keep customers coming back without lifting a finger.</p>
+                <ul class="card-items">
+                    <li>✅ Weekly social posts (Instagram/Facebook)</li>
+                    <li>✅ Google review monitoring + response management</li>
+                    <li>✅ Monthly email campaign</li>
+                    <li>✅ Seasonal promotion calendar</li>
+                    <li>✅ Reservation + ordering platform sync</li>
+                    <li class="unavailable">❌ Daily social posts</li>
+                    <li class="unavailable">❌ SMS text marketing</li>
+                    <li class="unavailable">❌ Paid advertising</li>
+                    <li class="unavailable">❌ Holiday + event campaigns</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4 class="card-title">Packed House</h4>
+                <div class="card-price">$1,999</div>
+                <div class="card-period">per month + ad spend</div>
+                <p class="card-subtitle">Full-stack marketing. More covers, more regulars, more revenue.</p>
+                <ul class="card-items">
+                    <li>✅ Everything in Growth</li>
+                    <li>✅ Daily social media posts (Instagram + Facebook)</li>
+                    <li>✅ Weekly email campaigns</li>
+                    <li>✅ SMS text marketing to your customer list</li>
+                    <li>✅ Geo-targeted local ads (Instagram, Facebook)</li>
+                    <li>✅ Slow-night recovery campaigns (data-driven)</li>
+                    <li>✅ Holiday + event campaign calendar</li>
+                    <li>✅ Loyalty + repeat customer campaigns</li>
+                    <li>✅ Monthly strategy call + ROI breakdown</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pricing-step-label" style="margin-top: 80px;">STEP 3 — COMPLETELY OPTIONAL</div>
+        <div class="container">
+            <h3 class="section-headline" style="font-size: 42px; margin-bottom: 12px;">Want To Add Anything?</h3>
+            <p class="section-subheadline">Completely optional. Add what makes sense for your place.</p>
+        </div>
+        <div class="addon-cards">
+            <div class="addon-card">
+                <div class="addon-title">📱 Social Media Launch Pack</div>
+                <div class="addon-price">$800</div>
+                <div class="addon-desc">One-time: 30 days of posts written, designed, and scheduled so you launch with momentum.</div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-title">🪧 QR Table Tents</div>
+                <div class="addon-price">$350</div>
+                <div class="addon-desc">Branded, waterproof. Guests scan and see your menu instantly.</div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-title">🗺️ Print Menu Design</div>
+                <div class="addon-price">$800</div>
+                <div class="addon-desc">Match your site with a beautiful physical menu. Print-ready files included.</div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-title">📧 Email List Setup</div>
+                <div class="addon-price">$300</div>
+                <div class="addon-desc">We set up your email capture, import your existing contacts, and send your first campaign. Your audience, forever.</div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-title">✏️ Menu Copy Editing</div>
+                <div class="addon-price">$200</div>
+                <div class="addon-desc">We rewrite your menu descriptions to sell. Better words = more orders.</div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-title">📊 Competitor Report</div>
+                <div class="addon-price">$250/mo</div>
+                <div class="addon-desc">Monthly one-page report tracking your top 3 competitors on Google and social.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST SIGNALS -->
+    <section class="trust-signals" data-animate>
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon">⚡</div>
+                    <div class="trust-label">Same-Day Response</div>
+                    <div class="trust-subtext">Text me anytime. You'll hear back the same day.</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-label">Your Data Is Yours</div>
+                    <div class="trust-subtext">We don't sell customer lists. Ever.</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">⏱️</div>
+                    <div class="trust-label">48-Hour Launch Guarantee</div>
+                    <div class="trust-subtext">Your site goes live within 48 hours or it's free.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" data-animate>
+        <img src="/images/syracuse-home.png" alt="Syracuse drink moment" class="about-image">
+        <div class="about-content">
+            <div class="eyebrow">WHO'S BEHIND THIS</div>
+            <h2 class="headline">Syracuse Is Home.</h2>
+            <p>I live here with my wife and daughter. We eat local, shop local, and root for local businesses to win.</p>
+            <p>You're not getting a faceless agency. You're getting me — someone who knows your slow Tuesdays, your packed Saturdays, and everything in between.</p>
+            <p>You get my cell. Same-day responses. Someone who picks up.</p>
+            <p class="about-signature">— Justin · Syracuse, NY</p>
+
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta" data-animate>
+        <div class="final-eyebrow">LET'S GO</div>
+        <h2 class="final-headline">Ready To Make It Live?</h2>
+
+        <div class="final-trust-pills">
+            <div class="final-trust-pill">⚡ Live in 48 Hours</div>
+            <div class="final-trust-pill">🔒 You Own Everything</div>
+            <div class="final-trust-pill">📞 Direct Line to Justin</div>
+        </div>
+        <a href="mailto:justindesignsyr@gmail.com" class="final-btn">Let's Talk →</a>
+
+    </section>
+
+    <!-- FOOTER -->
+
+
+    <script>
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-animate]').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
